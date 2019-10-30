@@ -383,10 +383,11 @@ def load_official_trainvaltest_split(dataset, testing=False):
 
     # assumes that ratings_train contains at least one example of every rating type
     rating_dict = {r: i for i, r in enumerate(np.sort(np.unique(ratings)).tolist())}
-
+    print(rating_dict)
     labels = np.full((num_users, num_items), neutral_rating, dtype=np.int32)
     labels[u_nodes, v_nodes] = np.array([rating_dict[r] for r in ratings])
-
+    print("lables")
+    print(labels)
     for i in range(len(u_nodes)):
         assert(labels[u_nodes[i], v_nodes[i]] == rating_dict[ratings[i]])
 
@@ -400,8 +401,10 @@ def load_official_trainvaltest_split(dataset, testing=False):
     num_train = num_train - num_val
 
     pairs_nonzero = np.array([[u, v] for u, v in zip(u_nodes, v_nodes)])
+    print([u,v])
+    print(pairs_nonzero)
     idx_nonzero = np.array([u * num_items + v for u, v in pairs_nonzero])
-
+    print(idx_nonzero)
     for i in range(len(ratings)):
         assert(labels[idx_nonzero[i]] == rating_dict[ratings[i]])
 

@@ -401,9 +401,12 @@ def load_official_trainvaltest_split(dataset, testing=False):
     num_train = num_train - num_val
 
     pairs_nonzero = np.array([[u, v] for u, v in zip(u_nodes, v_nodes)])
+    print("[u,v]")
     print([u,v])
+    print("pairs of nonzero")
     print(pairs_nonzero)
     idx_nonzero = np.array([u * num_items + v for u, v in pairs_nonzero])
+    print("isx")
     print(idx_nonzero)
     for i in range(len(ratings)):
         assert(labels[idx_nonzero[i]] == rating_dict[ratings[i]])

@@ -145,8 +145,10 @@ def create_trainvaltest_split(dataset, seed=1234, testing=False, datasplit_path=
     neutral_rating = -1
 
     rating_dict = {r: i for i, r in enumerate(np.sort(np.unique(ratings)).tolist())}
-
+    print(rating_dict)
     labels = np.full((num_users, num_items), neutral_rating, dtype=np.int32)
+    print("labels")
+    print(labels)
     labels[u_nodes, v_nodes] = np.array([rating_dict[r] for r in ratings])
     labels = labels.reshape([-1])
 
@@ -160,7 +162,10 @@ def create_trainvaltest_split(dataset, seed=1234, testing=False, datasplit_path=
     num_train = ratings.shape[0] - num_val - num_test
 
     pairs_nonzero = np.array([[u, v] for u, v in zip(u_nodes, v_nodes)])
-
+    print("SDfdsfdsfdsfdsfds")
+    print([u,v])
+    print(zip(u_nodes, v_nodes))
+    print(pairs_nonzero)
     idx_nonzero = np.array([u * num_items + v for u, v in pairs_nonzero])
 
     train_idx = idx_nonzero[0:num_train]

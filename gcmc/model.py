@@ -45,8 +45,9 @@ class Model(object):
     def build(self):
         """ Wrapper for _build() """
         with tf.variable_scope(self.name):
+            #calls its own build function 
             self._build()
-
+        print("Comes to this build")
         # Build sequential layer model
         self.activations.append(self.inputs)
         for layer in self.layers:
@@ -205,7 +206,7 @@ class RecommenderSideInfoGAE(Model):
                  learning_rate, num_basis_functions, hidden, num_users, num_items, accum,
                  num_side_features, self_connections=False, **kwargs):
         super(RecommenderSideInfoGAE, self).__init__(**kwargs)
-
+        print("THISSS")
         self.inputs = (placeholders['u_features'], placeholders['v_features'])
         self.u_features_side = placeholders['u_features_side']
         self.v_features_side = placeholders['v_features_side']
@@ -258,6 +259,7 @@ class RecommenderSideInfoGAE(Model):
         self._rmse()
 
     def _loss(self):
+        print("THIS 1") 
         self.loss += softmax_cross_entropy(self.outputs, self.labels)
 
         tf.summary.scalar('loss', self.loss)
@@ -271,6 +273,7 @@ class RecommenderSideInfoGAE(Model):
         tf.summary.scalar('rmse_score', self.rmse)
 
     def _build(self):
+        #builds the GCN layer
         if self.accum == 'sum':
             self.layers.append(OrdinalMixtureGCN(input_dim=self.input_dim,
                                                  output_dim=self.hidden[0],

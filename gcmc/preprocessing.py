@@ -55,7 +55,7 @@ def load_matlab_file(path_file, name_field):
 
     return out
 
-#2. comes here to preprocess the user and item features 
+
 def preprocess_user_item_features(u_features, v_features):
     """
     Creates one big feature matrix out of user features and item features.
@@ -64,9 +64,10 @@ def preprocess_user_item_features(u_features, v_features):
 
     zero_csr_u = sp.csr_matrix((u_features.shape[0], v_features.shape[1]), dtype=u_features.dtype)
     zero_csr_v = sp.csr_matrix((v_features.shape[0], u_features.shape[1]), dtype=v_features.dtype)
-    
+
     u_features = sp.hstack([u_features, zero_csr_u], format='csr')
     v_features = sp.hstack([zero_csr_v, v_features], format='csr')
+
     return u_features, v_features
 
 
@@ -78,15 +79,13 @@ def globally_normalize_bipartite_adjacency(adjacencies, verbose=False, symmetric
     # degree_u and degree_v are row and column sums of adj+I
 
     adj_tot = np.sum(adj for adj in adjacencies)
-    #array is collapsed into one dimension
     degree_u = np.asarray(adj_tot.sum(1)).flatten()
     degree_v = np.asarray(adj_tot.sum(0)).flatten()
 
     # set zeros to inf to avoid dividing by zero
     degree_u[degree_u == 0.] = np.inf
     degree_v[degree_v == 0.] = np.inf
-    
-    
+
     degree_u_inv_sqrt = 1. / np.sqrt(degree_u)
     degree_v_inv_sqrt = 1. / np.sqrt(degree_v)
     degree_u_inv_sqrt_mat = sp.diags([degree_u_inv_sqrt], [0])
@@ -149,8 +148,6 @@ def create_trainvaltest_split(dataset, seed=1234, testing=False, datasplit_path=
 
     labels = np.full((num_users, num_items), neutral_rating, dtype=np.int32)
     labels[u_nodes, v_nodes] = np.array([rating_dict[r] for r in ratings])
-    print("labels:")
-    print(labels)
     labels = labels.reshape([-1])
 
     # number of test and validation edges
@@ -163,10 +160,7 @@ def create_trainvaltest_split(dataset, seed=1234, testing=False, datasplit_path=
     num_train = ratings.shape[0] - num_val - num_test
 
     pairs_nonzero = np.array([[u, v] for u, v in zip(u_nodes, v_nodes)])
-    print("pairs non zero SDFDSFDSFSDFDSFDS")
-    print(pairs_nonzero)
-    print([u,v])
-    print(v in zip(u_nodes, v_nodes))
+
     idx_nonzero = np.array([u * num_items + v for u, v in pairs_nonzero])
 
     train_idx = idx_nonzero[0:num_train]
@@ -343,7 +337,7 @@ def load_official_trainvaltest_split(dataset, testing=False):
     fname = dataset
     data_dir = 'data/' + fname
 
-    #download_dataset(fname, files, data_dir)
+    download_dataset(fname, files, data_dir)
 
     dtypes = {
         'u_nodes': np.int32, 'v_nodes': np.int32,
@@ -455,15 +449,19 @@ def load_official_trainvaltest_split(dataset, testing=False):
 
     class_values = np.sort(np.unique(ratings))
 
-    if dataset =='ml_100k' or dataset=='mine_10k':
+    if dataset =='ml_100k':
 
         # movie features (genres)
         sep = r'|'
         movie_file = 'data/' + dataset + '/u.item'
-        movie_headers = ['Animals','Art','Chemistry','Biology','Monstors','History','Geography','Health','Heroes','Cars','Dolls','Food','Planes','Insects','Space','Transport','Health','Pirates']
-        print(movie_headers)
-        movie_df = pd.read_csv(movie_file, sep=sep, header=None,names=movie_headers, engine='python', error_bad_lines=False)
-        print("HELLO")
+        movie_headers = ['movie id', 'movie title', 'release date', 'video release date',
+                         'IMDb URL', 'unknown', 'Action', 'Adventure', 'Animation',
+                         'Childrens', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Fantasy',
+                         'Film-Noir', 'Horror', 'Musical', 'Mystery', 'Romance', 'Sci-Fi',
+                         'Thriller', 'War', 'Western']
+        movie_df = pd.read_csv(movie_file, sep=sep, header=None,
+                               names=movie_headers, engine='python')
+
         genre_headers = movie_df.columns.values[6:]
         num_genres = genre_headers.shape[0]
 
@@ -477,7 +475,7 @@ def load_official_trainvaltest_split(dataset, testing=False):
 
         sep = r'|'
         users_file = 'data/' + dataset + '/u.user'
-        users_headers = ['user id', 'age', 'gender', 'occupation', 'post code']
+        users_headers = ['user id', 'age', 'gender', 'occupation', 'zip code']
         users_df = pd.read_csv(users_file, sep=sep, header=None,
                                names=users_headers, engine='python')
 
@@ -532,7 +530,7 @@ def load_official_trainvaltest_split(dataset, testing=False):
 
         # load user features
         users_file = 'data/' + dataset + '/users.dat'
-        users_headers = ['user_id', 'gender', 'age', 'occupation', 'post-code']
+        users_headers = ['user_id', 'gender', 'age', 'occupation', 'zip-code']
         users_df = pd.read_csv(users_file, sep=sep, header=None,
                                names=users_headers, engine='python')
 

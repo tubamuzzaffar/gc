@@ -380,5 +380,5 @@ class RecommenderSideInfoGAE(Model):
         # Build metrics
         self._loss()
         self._accuracy()
-
+        print(self.outputs)
         self.opt_op = self.optimizer.minimize(self.loss, global_step=self.global_step)

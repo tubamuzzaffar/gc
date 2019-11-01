@@ -262,7 +262,7 @@ class RecommenderSideInfoGAE(Model):
         print("outputs")
         print(self.outputs) 
         self.loss += softmax_cross_entropy(self.outputs, self.labels)
-
+        print(self.loss)
         tf.summary.scalar('loss', self.loss)
 
     def _accuracy(self):

@@ -464,6 +464,7 @@ if VERBOSE:
 
 
 if TESTING:
+    print("NOW")
     test_avg_loss, test_rmse = sess.run([model.loss, model.rmse], feed_dict=test_feed_dict)
     print('test loss = ', test_avg_loss)
     print('test rmse = ', test_rmse)

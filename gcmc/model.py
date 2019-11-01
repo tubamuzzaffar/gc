@@ -259,6 +259,7 @@ class RecommenderSideInfoGAE(Model):
         self._rmse()
 
     def _loss(self):
+        print("outputs")
         print(self.outputs) 
         self.loss += softmax_cross_entropy(self.outputs, self.labels)
 

@@ -12,6 +12,9 @@ import numpy as np
 import scipy.sparse as sp
 import sys
 import json
+import csv
+import os
+from subprocess import Popen, PIPE, STDOUT
 
 from gcmc.preprocessing import create_trainvaltest_split, \
     sparse_to_tuple, preprocess_user_item_features, globally_normalize_bipartite_adjacency, \
@@ -401,23 +404,31 @@ print('Training...')
 for epoch in range(NB_EPOCH):
 
     t = time.time()
-
+    
     # Run single weight update
     # outs = sess.run([model.opt_op, model.loss, model.rmse], feed_dict=train_feed_dict)
     # with exponential moving averages
     outs = sess.run([model.training_op, model.loss, model.rmse], feed_dict=train_feed_dict)
-
+    
     train_avg_loss = outs[1]
     train_rmse = outs[2]
 
     val_avg_loss, val_rmse = sess.run([model.loss, model.rmse], feed_dict=val_feed_dict)
-
+     
     if VERBOSE:
         print("[*] Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(train_avg_loss),
               "train_rmse=", "{:.5f}".format(train_rmse),
               "val_loss=", "{:.5f}".format(val_avg_loss),
               "val_rmse=", "{:.5f}".format(val_rmse),
               "\t\ttime=", "{:.5f}".format(time.time() - t))
+       
+        header=['epoch','train_rmse','val_loss','val_rmse','time']
+        file = open('/content/data.csv','a')
+        writer = csv.writer(file)
+        if os.path.getsize('/content/data.csv'):
+            writer.writerow([h for h in header])  
+        file.close()
+        
 
     if val_rmse < best_val_score:
         best_val_score = val_rmse

@@ -423,7 +423,7 @@ for epoch in range(NB_EPOCH):
               "\t\ttime=", "{:.5f}".format(time.time() - t))
        
         header=['epoch','train_rmse','val_loss','val_rmse','time']
-        file = open('data.csv','a')
+        file = open('data.csv','r+')
         csvreader = csv.reader(file)
         for row in csvreader:
             if row[0] in (None, ""):

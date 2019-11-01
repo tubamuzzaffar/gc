@@ -400,6 +400,11 @@ best_epoch = 0
 wait = 0
 
 print('Training...')
+file_write = open('data.csv','a')
+    header=['epoch','train_rmse','val_loss','val_rmse','time']
+        csvreader = csv.reader(file_write)
+        writer = csv.writer(file_write, delimiter=',')
+        writer.writerow([h for h in header])  
 
 for epoch in range(NB_EPOCH):
 
@@ -416,23 +421,22 @@ for epoch in range(NB_EPOCH):
     val_avg_loss, val_rmse = sess.run([model.loss, model.rmse], feed_dict=val_feed_dict)
      
     if VERBOSE:
-        print("[*] Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(train_avg_loss),
+        print("[*] Epoch:", '%04d' % (epoch + 1), 
+              "train_loss=", "{:.5f}".format(train_avg_loss),
               "train_rmse=", "{:.5f}".format(train_rmse),
               "val_loss=", "{:.5f}".format(val_avg_loss),
               "val_rmse=", "{:.5f}".format(val_rmse),
               "\t\ttime=", "{:.5f}".format(time.time() - t))
        
-        header=['epoch','train_rmse','val_loss','val_rmse','time']
-        file = open('data.csv','r+')
-        file_write = open('data.csv','w+')
-        csvreader = csv.reader(file)
-        for row in csvreader:
-            if row[0] in (None, ""):
-                print("YESSS")
-                writer = csv.writer(file_write, delimiter=',')
-                writer.writerow([h for h in header])  
-        file.close()
-        file_write.close()
+        values = []
+        values.append('%04d' % (epoch + 1))
+        values.append("{:.5f}".format(train_rmse))
+        values.append("{:.5f}".format(val_avg_loss))
+        values.append("{:.5f}".format(val_rmse))
+        values.append("{:.5f}".format(time.time() - t))
+        
+        writer.writerow([v for v in values])
+        
         
 
     if val_rmse < best_val_score:
@@ -472,7 +476,7 @@ for epoch in range(NB_EPOCH):
 # store model including exponential moving averages
 saver = tf.train.Saver()
 save_path = saver.save(sess, "tmp/%s.ckpt" % model.name, global_step=model.global_step)
-
+file_write.close()
 
 if VERBOSE:
     print("\nOptimization Finished!")

@@ -423,7 +423,7 @@ for epoch in range(NB_EPOCH):
               "\t\ttime=", "{:.5f}".format(time.time() - t))
        
         header=['epoch','train_rmse','val_loss','val_rmse','time']
-        file = open('/content/data.csv','a')
+        file = open('data.csv','a')
         writer = csv.writer(file, delimiter=',')
         writer.writerow([h for h in header])  
         file.close()

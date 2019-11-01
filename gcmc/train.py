@@ -474,6 +474,7 @@ if TESTING:
     saver.restore(sess, save_path)
 
     test_avg_loss, test_rmse = sess.run([model.loss, model.rmse], feed_dict=test_feed_dict)
+    print(test_feed_dict)
     print('polyak test loss = ', test_avg_loss)
     print('polyak test rmse = ', test_rmse)
 

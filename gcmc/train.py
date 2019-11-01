@@ -401,11 +401,6 @@ wait = 0
 
 print('Training...')
 file_write = open('data.csv','a')
-header=['epoch','train_rmse','val_loss','val_rmse','time']
-csvreader = csv.reader(file_write)
-writer = csv.writer(file_write, delimiter=',')
-writer.writerow([h for h in header])  
-
 for epoch in range(NB_EPOCH):
 
     t = time.time()

@@ -424,8 +424,11 @@ for epoch in range(NB_EPOCH):
        
         header=['epoch','train_rmse','val_loss','val_rmse','time']
         file = open('data.csv','a')
-        writer = csv.writer(file, delimiter=',')
-        writer.writerow([h for h in header])  
+        csvreader = csv.reader(file)
+        for row in csvreader:
+            if row[0] in (None, ""):
+                writer = csv.writer(file, delimiter=',')
+                writer.writerow([h for h in header])  
         file.close()
         
 

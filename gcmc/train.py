@@ -401,7 +401,7 @@ wait = 0
 
 print('Training...')
 file_write = open('data.csv','a')
-write = csv.writer(file_write)
+writer = csv.writer(file_write)
 for epoch in range(NB_EPOCH):
 
     t = time.time()

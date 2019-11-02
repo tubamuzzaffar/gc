@@ -434,7 +434,6 @@ for epoch in range(NB_EPOCH):
         writer.writerow([v for v in values])
         
         
-
     if val_rmse < best_val_score:
         best_val_score = val_rmse
         best_epoch = epoch
@@ -467,7 +466,12 @@ for epoch in range(NB_EPOCH):
         # Load back normal variables
         saver = tf.train.Saver()
         saver.restore(sess, save_path)
+        
+valFile = open('val.csv','a')
+writer = csv.writer(valFile)
+writer.writerow([NB_EPOCH, best_val_score, val_rmse])
 
+valFile.close()
 
 # store model including exponential moving averages
 saver = tf.train.Saver()

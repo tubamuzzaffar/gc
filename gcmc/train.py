@@ -488,6 +488,7 @@ if TESTING:
     print('test rmse = ', test_rmse)
     
     vals =[]
+    vals.append(NB_EPOCH)
     vals.append(test_rmse)
     vals.append(test_avg_loss)
     writer.writerow([v for v in vals])

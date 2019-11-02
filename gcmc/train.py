@@ -479,12 +479,18 @@ if VERBOSE:
     print('best validation score =', best_val_score, 'at iteration', best_epoch)
 
 
+file = open('testing.csv','a')
+writer = csv.writer(file)
 if TESTING:
     print("NOW")
     test_avg_loss, test_rmse = sess.run([model.loss, model.rmse], feed_dict=test_feed_dict)
     print('test loss = ', test_avg_loss)
     print('test rmse = ', test_rmse)
-
+    
+    vals =[]
+    vals.append(test_rmse)
+    vals.append(test_avg_loss)
+    writer.writerow([v for v in vals])
     # restore with polyak averages of parameters
     variables_to_restore = model.variable_averages.variables_to_restore()
     saver = tf.train.Saver(variables_to_restore)
@@ -494,6 +500,8 @@ if TESTING:
     print(test_feed_dict)
     print('polyak test loss = ', test_avg_loss)
     print('polyak test rmse = ', test_rmse)
+    
+    
 
 else:
     # restore with polyak averages of parameters
@@ -516,4 +524,5 @@ results = vars(ap.parse_args()).copy()
 results.update({'best_val_score': float(best_val_score), 'best_epoch': best_epoch})
 print(json.dumps(results))
 
+file.close()
 sess.close()

@@ -432,10 +432,9 @@ for epoch in range(NB_EPOCH):
         values.append("{:.5f}".format(time.time() - t))
         
         with open('results.txt', 'a') as file:
-            for a in sys.argv[1:]:
             file.write(str(epoch) + ' '+ str(train_rmse) + ' ' + str(val_avg_loss)
                        + ' ' + str(val_rmse) + ' ' + str(time.time() - t) + '\n')
-            file.close()
+        file.close()
         writer.writerow([v for v in values])
         
         

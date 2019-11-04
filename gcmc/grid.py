@@ -1,5 +1,5 @@
 import subprocess
-from sklearn.grid_search import ParameterGrid
+from sklearn.model_selection import ParameterGrid
 
 
 param_grid = {'epoch' :[1000], 'lr':[0.0005, 0.001,0.00146,0.01,0.015,0.0175,0.02], 'dr':[0.03,0.4,0.5,0.6,0.7,0.8], 

@@ -426,6 +426,7 @@ for epoch in range(NB_EPOCH):
        
         values = []
         values.append('%04d' % (epoch + 1))
+        values.append('%04d' % (LR))
         values.append("{:.5f}".format(train_rmse))
         values.append("{:.5f}".format(val_avg_loss))
         values.append("{:.5f}".format(val_rmse))

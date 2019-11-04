@@ -8,4 +8,4 @@ param_grid = {'epoch' :[1000], 'lr':[0.0005, 0.001,0.00146,0.01,0.015,0.0175,0.0
 grid = ParameterGrid(param_grid)
 
 for params in grid:
-subprocess.call("python train.py -d ml_100k --accum stack -do" + str(params['dr']) + "-nleft -nb 2 -e" + str(params['epoch']) + "--features --feat_hidden"+ str(params['hf']) +" --testing", shell=True)
+  subprocess.call("python train.py -d ml_100k --accum stack -do" + str(params['dr']) + "-nleft -nb 2 -e" + str(params['epoch']) + "--features --feat_hidden"+ str(params['hf']) +" --testing", shell=True)

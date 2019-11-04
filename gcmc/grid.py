@@ -13,7 +13,7 @@ for params in grid:
   lr = str(params['lr'])
   hf = str(params['hf'])
   x = params['hn']
-  firt = str(x[0])
+  first = str(x[0])
   second = str(x[1])
 
   #subprocess.check_call(["./train.py", "-d", "ml_100k","--accum",  str(params['ac']),"-do",str(params['dr']),"-nleft", "-nb" , "2", "-e",str(params['epoch']),"--features", "--feat_hidden", str(params['hf']),"--testing" ])

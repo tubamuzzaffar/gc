@@ -435,6 +435,7 @@ for epoch in range(NB_EPOCH):
         with open('results.txt', 'a') as file:
             file.write(str(epoch) +' '+ str(LR) + str(DO) +' '+ str(HIDDEN)+ ' '+ str(FEATHIDDEN) + ' ' + str(ACCUM) + ' '+ str(train_rmse) + ' ' + str(val_avg_loss)
                        + ' ' + str(val_rmse) + ' ' + str(time.time() - t) + '\n')
+            file.write('\n')
         file.close()
         writer.writerow([v for v in values])
         
@@ -515,8 +516,6 @@ if TESTING:
     print(test_feed_dict)
     print('polyak test loss = ', test_avg_loss)
     print('polyak test rmse = ', test_rmse)
-    
-    
 
 else:
     # restore with polyak averages of parameters

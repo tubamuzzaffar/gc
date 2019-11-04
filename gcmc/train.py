@@ -432,7 +432,7 @@ for epoch in range(NB_EPOCH):
         values.append("{:.5f}".format(time.time() - t))
         
         with open('results.txt', 'a') as file:
-            file.write(str(epoch) + ' '+ str(train_rmse) + ' ' + str(val_avg_loss)
+            file.write(str(epoch) +' '+ str(LR) + str(DO) +' '+ str(HIDDEN)+ ' '+ str(FEATHIDDEN) + ' ' + str(ACCUM) + ' '+ str(train_rmse) + ' ' + str(val_avg_loss)
                        + ' ' + str(val_rmse) + ' ' + str(time.time() - t) + '\n')
         file.close()
         writer.writerow([v for v in values])
@@ -473,7 +473,7 @@ for epoch in range(NB_EPOCH):
         
 valFile = open('val.csv','a')
 writer = csv.writer(valFile)
-writer.writerow([NB_EPOCH, best_val_score, val_rmse])
+writer.writerow([NB_EPOCH,LR,HIDDEN,FEATHIDDEN,ACCUM,DO,best_val_score, val_rmse])
 
 valFile.close()
 
@@ -497,6 +497,11 @@ if TESTING:
     
     vals =[]
     vals.append(NB_EPOCH)
+    vals.append(LR)
+    vals.append(DO)
+    vals.append(HIDDEN)
+    vals.append(FEATHIDDEN)
+    vals.append(ACCUM)
     vals.append(test_rmse)
     vals.append(test_avg_loss)
     writer.writerow([v for v in vals])

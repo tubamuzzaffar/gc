@@ -12,8 +12,8 @@ for params in grid:
   dr = str(params['dr'])
   lr = str(params['lr'])
   hf = str(params['hf'])
-  x = [x for (x,y) in params['hf'])
-  y = [y for (x,y) in params['hf'])
+  x = [x for (x,y) in params['hn'])
+  y = [y for (x,y) in params['hn'])
        
   print(x,y)
   #subprocess.check_call(["./train.py", "-d", "ml_100k","--accum",  str(params['ac']),"-do",str(params['dr']),"-nleft", "-nb" , "2", "-e",str(params['epoch']),"--features", "--feat_hidden", str(params['hf']),"--testing" ])

@@ -7,4 +7,4 @@ param_grid = {'epoch' :[1000], 'lr':[0.0005, 0.001,0.00146,0.01,0.015,0.0175,0.0
 grid = list(ParameterGrid(param_grid))
 
 for params in grid:
-  print( params['ac'], str(params['dr']))
+  print( params['ac'], str(params['dr']), str(params['lr']),str(params['hn']), str(params['hf']))

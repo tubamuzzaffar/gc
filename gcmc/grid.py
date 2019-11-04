@@ -8,5 +8,6 @@ grid = list(ParameterGrid(param_grid))
 
 for params in grid:
   print( params['ac'], str(params['dr']), str(params['lr']),str(params['hn']), str(params['hf']))
-  subprocess.call("python train.py -d ml_100k --accum " + params['ac'] +" -do " + str(params['dr']) + " -nleft -nb 2 -e " + str(params['epoch']) + " --features --feat_hidden "+ str(params['hf']) +" --testing", shell=True)
+  subprocess.check_call(["./train.py ", "-d ", "ml_100k"," --accum ",  params['ac'], +" -do ", + str(params['dr']),"-nleft", "-nb" , "2", "-e",str(params['epoch'])," --features --feat_hidden ", str(params['hf']),  " --testing" )]
+  #subprocess.call("python train.py -d ml_100k --accum " + params['ac'] +" -do " + str(params['dr']) + " -nleft -nb 2 -e " + str(params['epoch']) + " --features --feat_hidden "+ str(params['hf']) +" --testing")
 

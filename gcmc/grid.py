@@ -8,7 +8,7 @@ param_grid = {'epoch' :[1000, 100, 50,500], 'lr':[0.0005, 0.001,0.00146,0.01,0.0
 
 grid = list(ParameterGrid(param_grid))
 
-e_val = random.sample(grid, 5)
+e_val = random.sample(grid, 100)
 print(e_val)
 
 for params in e_val:

@@ -16,7 +16,7 @@ for params in grid:
   #epoch = str(params['epoch'])
   #e_val = random.sample(params['epoch'],1)[0]
  # ac = str(params['ac'])
- dr = str(params['dr'])
+  dr = str(params['dr'])
   #lr = str(params['lr'])
  # hf = str(params['hf'])
  # x = params['hn']

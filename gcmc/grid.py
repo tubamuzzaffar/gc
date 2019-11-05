@@ -15,7 +15,7 @@ for params in grid:
   dr = str(random.sample(params['dr'],1)[0])
   lr = str(random.sample(params['lr'],1)[0])
   hf = str(random.sample(params['hf'],1)[0])
-  x = random.sample(params['hn'],1)[0]
+  x = random.sample(params['hn'],1)[0])
   first = str(x[0])
   second = str(x[1])
 

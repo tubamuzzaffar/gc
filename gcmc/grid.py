@@ -10,12 +10,13 @@ grid = list(ParameterGrid(param_grid))
 
 for params in grid:
   print(params['ac'], str(params['dr']), str(params['lr']), str(params['hf']))
-  epoch = str(random.sample(params['epoch'],1)[0])
-  ac = str(random.sample(params['ac'],1)[0])
-  dr = str(random.sample(params['dr'],1)[0])
-  lr = str(random.sample(params['lr'],1)[0])
-  hf = str(random.sample(params['hf'],1)[0])
-  x = random.sample(params['hn'],1)[0]
+  print(len(params['epoch']))
+  #e_val = random.sample(params['epoch'],1)[0]
+  ac = str(params['ac'])
+  dr = str(params['dr'])
+  lr = str(params['lr'])
+  hf = str(params['hf'])
+  x = params['hn']
   first = str(x[0])
   second = str(x[1])
 

@@ -15,15 +15,15 @@ for params in grid:
   #print(params['ac'], str(params['dr']), str(params['lr']), str(params['hf']))
   #epoch = str(params['epoch'])
   #e_val = random.sample(params['epoch'],1)[0]
- # ac = str(params['ac'])
+  ac = str(params['ac'])
   #dr = str(params['dr'])
   #lr = str(params['lr'])
  # hf = str(params['hf'])
-  x = params['hn']
-  first = str(x[0])
-  second = str(x[1])
+#   x = params['hn']
+#   first = str(x[0])
+#   second = str(x[1])
 
   #subprocess.check_call(["./train.py", "-d", "ml_100k","--accum",  str(params['ac']),"-do",str(params['dr']),"-nleft", "-nb" , "2", "-e",str(params['epoch']),"--features", "--feat_hidden", str(params['hf']),"--testing" ])
   #subprocess.call("python train.py -d ml_100k --accum " + ac +" -do " + dr + " -nleft -nb 2 -e " + epoch + " --features --feat_hidden "+ hf +" --testing --learning_rate " + lr + " --hidden " + first +" "+ second ,shell=True)
-  subprocess.call("python train.py -d ml_100k --accum stack -do 0.7 -nleft -nb 2 -e 1000 --features --feat_hidden 10 --testing --hidden "+ first +" " + second,shell=True)
+  subprocess.call("python train.py -d ml_100k --accum "+ ac +" -do 0.7 -nleft -nb 2 -e 1000 --features --feat_hidden 10 --testing",shell=True)
 

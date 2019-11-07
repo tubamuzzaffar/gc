@@ -62,7 +62,6 @@ class Model(object):
         # Build metrics
         self._loss()
         self._accuracy()
-        print(self.outputs)
         self.opt_op = self.optimizer.minimize(self.loss, global_step=self.global_step)
 
     def predict(self):
@@ -259,10 +258,7 @@ class RecommenderSideInfoGAE(Model):
         self._rmse()
 
     def _loss(self):
-        print("outputs")
-        print(self.outputs) 
         self.loss += softmax_cross_entropy(self.outputs, self.labels)
-        print(self.loss)
         tf.summary.scalar('loss', self.loss)
 
     def _accuracy(self):
@@ -381,5 +377,4 @@ class RecommenderSideInfoGAE(Model):
         # Build metrics
         self._loss()
         self._accuracy()
-        print(self.outputs)
         self.opt_op = self.optimizer.minimize(self.loss, global_step=self.global_step)

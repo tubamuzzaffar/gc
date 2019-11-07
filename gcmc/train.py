@@ -432,7 +432,7 @@ for epoch in range(NB_EPOCH):
         values.append("{:.5f}".format(val_rmse))
         values.append("{:.5f}".format(time.time() - t))
         
-        with open('results.txt', 'a') as file:
+        with open("results.txt", 'a') as file:
             file.write(str(epoch) +' '+ str(LR) + str(DO) +' '+ str(HIDDEN)+ ' '+ str(FEATHIDDEN) + ' ' + str(ACCUM) + ' '+ str(train_rmse) + ' ' + str(val_avg_loss)
                        + ' ' + str(val_rmse) + ' ' + str(time.time() - t) + '\n')
             file.write('\n')

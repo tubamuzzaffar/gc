@@ -54,7 +54,9 @@ class Model(object):
             hidden = layer(self.activations[-1])
             self.activations.append(hidden)
         self.outputs = self.activations[-1]
-
+        
+        tf.print(self.outputs)
+        
         # Store model variables for easy access
         variables = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope=self.name)
         self.vars = {var.name: var for var in variables}
@@ -132,6 +134,9 @@ class RecommenderGAE(Model):
         self.embeddings = self.activations[2]
 
         self._rmse()
+        
+    def output(self):
+        
 
     def _loss(self):
         self.loss += softmax_cross_entropy(self.outputs, self.labels)
@@ -369,7 +374,7 @@ class RecommenderSideInfoGAE(Model):
         self.outputs = self.activations[-1]
 
         self.outputs = self.activations[-1]
-
+           
         # Store model variables for easy access
         variables = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope=self.name)
         self.vars = {var.name: var for var in variables}

@@ -66,9 +66,6 @@ class Model(object):
         self._accuracy()
         self.opt_op = self.optimizer.minimize(self.loss, global_step=self.global_step)
 
-    def predict(self):
-        pass
-
     def _loss(self):
         raise NotImplementedError
 
@@ -135,9 +132,6 @@ class RecommenderGAE(Model):
 
         self._rmse()
         
-    def output(self):
-        
-
     def _loss(self):
         self.loss += softmax_cross_entropy(self.outputs, self.labels)
 

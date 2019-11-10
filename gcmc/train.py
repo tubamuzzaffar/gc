@@ -464,6 +464,9 @@ for epoch in range(NB_EPOCH):
         saver = tf.train.Saver(variables_to_restore)
         saver.restore(sess, save_path)
         
+            train_avg_loss, train_rmse = sess.run([model.loss, model.rmse], feed_dict=train_feed_dict)
+            print(train_avg_loss)
+            print(train_rmse)
         val_avg_loss, val_rmse = sess.run([model.loss, model.rmse], feed_dict=val_feed_dict)
 
         print('polyak val loss = ', val_avg_loss)
@@ -475,7 +478,7 @@ for epoch in range(NB_EPOCH):
         
 valFile = open('val.csv','a')
 writer = csv.writer(valFile)
-writer.writerow([NB_EPOCH,LR,HIDDEN,FEATHIDDEN,ACCUM,DO,best_val_score, val_rmse])
+writer.writerow([NB_EPOCH,LR,HIDDEN,FEATHIDDEN,ACCUM,DO,best_val_score, val_rmse, train_avg_loss,train_rmse])
 
 valFile.close()
 
@@ -493,10 +496,6 @@ file = open('testing.csv','a')
 writer = csv.writer(file)
 if TESTING:
     print("NOW")
-    train_avg_loss, train_rmse = sess.run([model.loss, model.rmse], feed_dict=train_feed_dict)
-    print(train_avg_loss)
-    print(train_rmse)
-    print("TTRAIN WORKED")
     test_avg_loss, test_rmse = sess.run([model.loss, model.rmse], feed_dict=test_feed_dict)
     print('test loss = ', test_avg_loss)
     print('test rmse = ', test_rmse)

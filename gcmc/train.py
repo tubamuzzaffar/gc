@@ -424,20 +424,20 @@ for epoch in range(NB_EPOCH):
               "val_rmse=", "{:.5f}".format(val_rmse),
               "\t\ttime=", "{:.5f}".format(time.time() - t))
        
-        values = []
-        values.append('%04d' % (epoch + 1))
-        values.append('%04d' % (LR))
-        values.append("{:.5f}".format(train_rmse))
-        values.append("{:.5f}".format(val_avg_loss))
-        values.append("{:.5f}".format(val_rmse))
-        values.append("{:.5f}".format(time.time() - t))
+#         values = []
+#         values.append('%04d' % (epoch + 1))
+#         values.append('%04d' % (LR))
+#         values.append("{:.5f}".format(train_rmse))
+#         values.append("{:.5f}".format(val_avg_loss))
+#         values.append("{:.5f}".format(val_rmse))
+#         values.append("{:.5f}".format(time.time() - t))
         
         with open("results.txt", 'a') as file:
             file.write(str(epoch) +' '+ str(LR) + str(DO) +' '+ str(HIDDEN)+ ' '+ str(FEATHIDDEN) + ' ' + str(ACCUM) + ' '+ str(train_avg_loss) + ' '+ str(train_rmse) + ' ' + str(val_avg_loss)
                        + ' ' + str(val_rmse) + ' ' + str(time.time() - t) + '\n')
             file.write('\n')
         file.close()
-        writer.writerow([v for v in values])
+#         writer.writerow([v for v in values])
         
         
     if val_rmse < best_val_score:

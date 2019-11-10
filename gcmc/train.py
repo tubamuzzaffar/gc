@@ -464,9 +464,9 @@ for epoch in range(NB_EPOCH):
         saver = tf.train.Saver(variables_to_restore)
         saver.restore(sess, save_path)
         
-            train_avg_loss, train_rmse = sess.run([model.loss, model.rmse], feed_dict=train_feed_dict)
-            print(train_avg_loss)
-            print(train_rmse)
+        train_avg_loss, train_rmse = sess.run([model.loss, model.rmse], feed_dict=train_feed_dict)
+        print(train_avg_loss)
+        print(train_rmse)
         val_avg_loss, val_rmse = sess.run([model.loss, model.rmse], feed_dict=val_feed_dict)
 
         print('polyak val loss = ', val_avg_loss)
